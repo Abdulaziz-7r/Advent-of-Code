@@ -34,10 +34,33 @@ def solve_1(path):
     print(nice_str)
 
 
+##########################################################
+
+
+def has_double_pair(string):
+    for i in range(len(string) - 1):
+        pair = string[i] + string[i + 1]
+        for j in range(i + 2, len(string) - 1):
+            if pair == (string[j] + string[j + 1]):
+                return True
+    return False
+
+
+def has_letter_between(string):
+    for i in range(len(string) - 2):
+        if string[i] == string[i + 2]:
+            return True
+    return False
+
+
 def solve_2(path):
     with open(path) as f:
         data = [line.strip() for line in f.readlines()]
-    ...
+    count = 0
+    for string in data:
+        if has_double_pair(string) and has_letter_between(string):
+            count += 1
+    print(count)
 
 
 #################################################
