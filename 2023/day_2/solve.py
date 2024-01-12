@@ -38,13 +38,36 @@ def solve_1(path):
             continue
         id_sum += game_num
         game_num += 1
-    
+
     print(id_sum)
+
 
 def solve_2(path):
     with open(path) as f:
         data = [line.strip() for line in f.readlines()]
-    ...
+
+    total = 0
+    for game in data:
+        red = 0
+        green = 0
+        blue = 0
+        game = game[(game.index(":") + 2) :]
+        sets = game.split(";")
+        for set in sets:
+            set = set.strip().replace(",", "")
+            cubes = set.split(" ")
+            for i in range(0, len(cubes), 2):
+                if cubes[i + 1] == "red":
+                    if int(cubes[i]) > red:
+                        red = int(cubes[i])
+                elif cubes[i + 1] == "green":
+                    if int(cubes[i]) > green:
+                        green = int(cubes[i])
+                elif cubes[i + 1] == "blue":
+                    if int(cubes[i]) > blue:
+                        blue = int(cubes[i])
+        total += red * green * blue
+    print(total)
 
 
 #################################################
